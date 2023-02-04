@@ -1,6 +1,8 @@
 import { FunctionComponent, ReactNode } from 'react';
 import ModalProvider from './provider/ModalProvider';
+import ModalTemplate from './components/ModalTemplate';
 import useModal from './hooks/useModal';
+import useModalAnimation from './hooks/useModalAnimation';
 
 export interface ModalType {
   id: number;
@@ -17,6 +19,10 @@ export interface ModalComponentPropsType {
   resolve?: <T>(value: T) => void;
 }
 
+export interface AnimationOptions {
+  duration?: number;
+  className?: string;
+}
 type PropsOf<T> = T extends FunctionComponent<infer P> ? P : {};
 
 export type AddModalType = <T extends FunctionComponent<any>>(params : { component: T, props?: PropsOf<T>, duplicateCheck?: boolean, isScrollFreeze?: boolean }) => Promise<any>;
@@ -25,5 +31,4 @@ export type CloseModalType = (id: number) => void;
 export type ResolveModalType = <T extends ModalType, R>(modal: T, result: R) => void;
 export type CheckModalType = <T extends FunctionComponent>(component: T, onlyLastCheck?: boolean) => boolean;
 
-
-export {ModalProvider, useModal};
+export { ModalProvider, ModalTemplate, useModal, useModalAnimation };
