@@ -4,7 +4,7 @@ import { ModalProvider } from 'react-easy-modal';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ModalProvider showDim>
+    <ModalProvider showDim={false} className="wemade-md">
       <Component {...pageProps} />
     </ModalProvider>
   );
