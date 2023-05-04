@@ -1,14 +1,19 @@
+import { ModalPropsType } from '@/../dist';
 import React from 'react';
 import styled from 'styled-components';
 
-interface PropsType {
-    className?: string;
+interface PropsType extends ModalPropsType {
+  className?: string;
 }
 
-const TestModalComp = ({className}: PropsType) => {
+const TestModalComp = ({ className, close, resolve }: PropsType) => {
   return (
     <div className={className}>
       TestModal
+      <div className="btn-cont">
+        <button onClick={close}>취소</button>
+        <button onClick={() => resolve && resolve(true)}>확인</button>
+      </div>
     </div>
   );
 };
