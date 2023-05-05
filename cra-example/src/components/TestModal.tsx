@@ -4,13 +4,12 @@ import styled from 'styled-components';
 
 interface PropsType extends ModalPropsType {
   className?: string;
-  text: string;
 }
 
-const TestModalComp = ({ className, text, close, resolve }: PropsType) => {
+const TestModalComp = ({ className, close, resolve }: PropsType) => {
   return (
     <div className={className}>
-      TestModal {text}
+      TestModal
       <div className="btn-cont">
         <button onClick={close}>취소</button>
         <button onClick={() => resolve && resolve(true)}>확인</button>

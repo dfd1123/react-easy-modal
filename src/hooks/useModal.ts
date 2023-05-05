@@ -1,12 +1,12 @@
 import { AddModalType, CheckModalType, CloseModalType, ModalType, OpenModalType, ResolveModalType } from '../index';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 import { ModalContext } from '../provider/ModalProvider';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 const useModal = () => {
-  const nextPastPathname = useRef('');
-  const router = useRouter();
-  const { pathname } = router;
+  // const nextPastPathname = useRef('');
+  // const router = useRouter();
+  // const { pathname } = router;
   const { modals, setModals, scrollRelease, scrollFreeze } = useContext(ModalContext);
 
   const checkModal : CheckModalType = (
@@ -23,7 +23,7 @@ const useModal = () => {
     return modalList.some(m => m.component.name === component.name);
   };
 
-  const addModal : AddModalType = ({ component, props, duplicateCheck, isScrollFreeze }) => {
+  const addModal : AddModalType = ({ component, props, isScrollFreeze }) => {
     return new Promise((resolve, reject) => {
       const modal: ModalType = {
         id: -1,
@@ -38,7 +38,7 @@ const useModal = () => {
       const modalList = modals.current;
 
       let duplicate = checkModal(modal.component, true);
-      if (duplicateCheck) duplicate = checkModal(modal.component);
+      if (props?.duplicateCheck) duplicate = checkModal(modal.component);
       if (duplicate) return;
 
       modal.id = (modalList[modalList.length - 1]?.id ?? -1) + 1;
@@ -50,17 +50,15 @@ const useModal = () => {
   const openModal : OpenModalType = async (
     component,
     props,
-    duplicateCheck = false,
   ) => {
-    return addModal({ component, props, duplicateCheck, isScrollFreeze: true });
+    return addModal({ component, props, isScrollFreeze: true });
   };
 
   const openScrollFreeModal : OpenModalType = async (
     component,
     props,
-    duplicateCheck = false,
   ) => {
-    return addModal({ component, props, duplicateCheck, isScrollFreeze: false });
+    return addModal({ component, props, isScrollFreeze: false });
   };
 
   const closeModal : CloseModalType = id => {
@@ -80,14 +78,14 @@ const useModal = () => {
     scrollRelease && scrollRelease();
   };
 
-  useEffect(() => {
-    if (nextPastPathname.current !== pathname) nextPastPathname.current = pathname;
-    return () => {
-      if (nextPastPathname.current !== pathname) {
-        resetModal();
-      }
-    };
-  }, [pathname]);
+  // useEffect(() => {
+  //   if (nextPastPathname.current !== pathname) nextPastPathname.current = pathname;
+  //   return () => {
+  //     if (nextPastPathname.current !== pathname) {
+  //       resetModal();
+  //     }
+  //   };
+  // }, [pathname]);
 
   return {
     modals,

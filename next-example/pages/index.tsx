@@ -1,12 +1,13 @@
-import {useModal} from 'react-easy-modal';
+import { useModal } from 'react-easy-modal';
 import TestModal from '@/components/TestModal';
 
 export default function Home() {
-  const {modal} = useModal();
+  const { modal } = useModal();
 
-  const openModal = () => {
-    modal(TestModal);
-  }
+  const openModal = async () => {
+    const res = await modal(TestModal, { text: '바보', animation: { name: 'fade', duration: 250 }, duplicateCheck: true });
+    console.log('response:', res);
+  };
 
   return (
     <div>
@@ -14,5 +15,5 @@ export default function Home() {
         <button onClick={openModal}>Open Modal</button>
       </div>
     </div>
-  )
+  );
 }
