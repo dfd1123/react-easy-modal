@@ -5,7 +5,7 @@ export default function Home() {
   const { modal } = useModal();
 
   const openModal = async () => {
-    const res = await modal(TestModal, { text: '바보', animation: { name: 'fade', duration: 250 }, duplicateCheck: true });
+    const res = await modal(TestModal, { text: 'Test', animation: { name: 'fade', duration: 250 }, duplicateCheck: true });
     console.log('response:', res);
   };
 

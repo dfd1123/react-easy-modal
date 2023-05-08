@@ -7,6 +7,7 @@ interface PropsType {
   children: React.ReactNode;
   className?: string;
   animation?: AnimationOptions;
+  pathname: string;
   backActionControl?: {
     func: (value: { modals: MutableRefObject<ModalType[]> }) => void;
     deps?: any[];
@@ -27,7 +28,7 @@ const ModalContainerStyle = styled.div`
 
 export const ModalContext = createContext(initialValue);
 
-const ModalProvider = ({ className = 'jw-modal', animation, children, backActionControl, scrollRelease, scrollFreeze }: PropsType) => {
+const ModalProvider = ({ className = 'jw-modal', animation, children, backActionControl, pathname, scrollRelease, scrollFreeze }: PropsType) => {
   const modalList = useRef<ModalType[]>([]);
   const [modals, setModals] = useState<ModalType[]>([]);
 
@@ -44,6 +45,11 @@ const ModalProvider = ({ className = 'jw-modal', animation, children, backAction
   useEffect(() => {
     backActionControl && backActionControl.func({ modals: modalList });
   }, [...(backActionControl?.deps || []), backActionControl]);
+
+  useEffect(() => {
+    setModals([]);
+    scrollRelease && scrollRelease();
+  }, [pathname]);
 
   return (
     <ModalContext.Provider
