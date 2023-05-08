@@ -1,3 +1,4 @@
+import '@/styles/animation.css';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { ModalProvider } from 'react-easy-modal';

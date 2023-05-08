@@ -38,7 +38,7 @@ const useModalAnimation = (modal: ModalType, close: CloseModalType) => {
 
     const timeOutId = window.setTimeout(() => {
       setDone(done => !done);
-    }, animationDuration);
+    }, animationClassName ? animationDuration : 0);
 
     timeOutIds.current.push(timeOutId);
   };
