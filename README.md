@@ -1,4 +1,4 @@
-# **react-easy-modal (🪄REMO)**
+# **react-easily-modal (🪄REMO)**
 
 This library is a library that makes it easier to use modals, provides a high degree of freedom for easy customization, and helps manage modals efficiently.
 
@@ -12,9 +12,9 @@ Let me introduce you. Easy, convenient and intuitive modal REMO!
 1. Enter the next-easy-keepalive installation command as shown below:
 
 ```bash
-npm i react-easy-modal
+npm i react-easily-modal
 # or 
-yarn add react-easy-modal
+yarn add react-easily-modal
 ```
 
 2. You need to add ModalProvider to `/pages/_app.tsx` or `/App.tsx`. The important thing here is to wrap it right
@@ -24,7 +24,7 @@ yarn add react-easy-modal
 ```js
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import { ModalProvider } from 'react-easy-modal'; // import ModalProvider
+import { ModalProvider } from 'react-easily-modal'; // import ModalProvider
 
 export default function App({Component, pageProps}: AppProps) {
   const router = useRouter();
@@ -54,7 +54,7 @@ Then, we will tell you how to use REMO in earnest.
 5. The 2nd argument of the `modal` function can deliver `various options and props values ​​to be passed to the component received as the 1st argument`.
 
 ```tsx
-import { useModal, ModalPropsType, ModalTemplate } from 'react-easy-modal';
+import { useModal, ModalPropsType, ModalTemplate } from 'react-easily-modal';
 
 interface PropsType extends ModalPropsType {
   className?: string;
@@ -103,7 +103,7 @@ See examples below and create your own Modal templates!
 ```tsx
 import React from 'react';
 import styled from 'styled-components';
-import { ModalTemplatePropsType } from 'react-easy-modal';
+import { ModalTemplatePropsType } from 'react-easily-modal';
 
 const ModalTemplateComp = ({ className, showDim, children, close }: ModalTemplatePropsType) => {
   return (
@@ -163,7 +163,7 @@ If you want to add animation effects to the modal, first put animation keyframes
 Then, pass the option value related to animation to the second argument of the modal function assigned with the useModal hook.
 
 ```tsx
-import { useModal } from 'react-easy-modal';
+import { useModal } from 'react-easily-modal';
 import TestModal from '@/components/TestModal';
 
 export default function Home() {
