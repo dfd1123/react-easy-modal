@@ -3,6 +3,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "description": "It is an easy-to-use modal library exclusively for react.js.",
   "files": [
     "dist",
     "src"
@@ -20,6 +21,7 @@
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
+    "next": ">=12",
     "react": ">=16"
   },
   "husky": {
@@ -34,7 +36,18 @@
     "trailingComma": "es5"
   },
   "name": "react-easy-modal",
-  "author": "dfd1123",
+  "author": "Jong-wan Kim",
+  "keywords": [
+    "react",
+    "next",
+    "nextjs",
+    "modal",
+    "react modal",
+    "next modal",
+    "modal",
+    "remo",
+    "REMO"
+  ],
   "module": "dist/react-easy-modal.esm.js",
   "size-limit": [
     {
@@ -46,6 +59,13 @@
       "limit": "10 KB"
     }
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dfd1123/react-easy-modal"
+  },
+  "bugs": {
+    "url": "https://github.com/dfd1123/react-easy-modal/issues"
+  },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.1.2",
     "@types/react": "^18.0.27",
