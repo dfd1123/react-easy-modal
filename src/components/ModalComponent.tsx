@@ -1,5 +1,5 @@
 import React, { ComponentClass, FunctionComponent, Suspense, useContext, useEffect } from 'react';
-import { DEFAULT_ANIMATION_DURATION, ModalTemplate, ModalType, useModalAnimation } from '../index';
+import { DEFAULT_ANIMATION_DURATION, ModalType, useModalAnimation } from '../index';
 import useModal from '../hooks/useModal';
 import styled from 'styled-components';
 import { ModalContext } from '../provider/ModalProvider';
@@ -16,7 +16,7 @@ const Component = <P extends {}>({ is, props } : { is?: FunctionComponent<P> | C
 };
 
 const ModalComponentComp = ({ className, modal }: PropsType) => {
-  const { className: modalClassName, showDim } = useContext(ModalContext);
+  const { className: modalClassName } = useContext(ModalContext);
   const { closeModal, resolveModal, scrollRelease } = useModal();
   const { transitionClass, animationClassName, closeModal: closeAnimationModal } = useModalAnimation(modal, closeModal);
 
@@ -36,7 +36,7 @@ const ModalComponentComp = ({ className, modal }: PropsType) => {
   }, []);
 
   return (
-    <ModalTemplate className={`${className} ${modalClassName} ${transitionClass}`} showDim={showDim} close={() => close(modal)}>
+    <div className={`${className} ${modalClassName} ${transitionClass}`}>
       <Component
         is={modal.component}
         key={modal.id}
@@ -46,7 +46,7 @@ const ModalComponentComp = ({ className, modal }: PropsType) => {
           resolve: <T extends unknown>(result: T) => resolve(modal, result),
         }}
       />
-    </ModalTemplate>
+    </div>
 
   );
 };
@@ -64,9 +64,9 @@ const ModalComponent = styled(ModalComponentComp)`
     >.dim{
       opacity: 1;
     }
-    &-done{
-      visibility: visible; 
-    }
+  }
+  &.enter-done, &.leave-done{
+    visibility: visible;
   }
   &.enter{
     .modal-cont{
@@ -82,17 +82,6 @@ const ModalComponent = styled(ModalComponentComp)`
       animation-duration: ${({ modal }) => (modal.props?.animation?.duration ? `${modal.props?.animation?.duration}ms` : `${DEFAULT_ANIMATION_DURATION}ms`)};
       animation-timing-function: ${({ modal }) => (modal.props?.animation?.timingFunction ? `${modal.props?.animation?.timingFunction}` : 'ease-in-out')};
       animation-direction: reverse;
-    }
-  }
-
-  @keyframes modal-fade {
-    0% {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    100%{
-      opacity: 1;
-      transform: scale(1);
     }
   }
 `;

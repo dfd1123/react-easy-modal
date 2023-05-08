@@ -1,15 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ModalTemplatePropsType } from '..';
 
-interface PropsType {
-  className?: string;
-  children: React.ReactNode;
-  showDim?: boolean;
-  close: () => void;
-
-}
-
-const ModalTemplateComp = ({ className, showDim, children, close }: PropsType) => {
+const ModalTemplateComp = ({ className, showDim, children, close }: ModalTemplatePropsType) => {
   return (
     <div className={className}>
       {!!showDim && (

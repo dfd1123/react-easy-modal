@@ -6,7 +6,6 @@ import ModalComponent from '../components/ModalComponent';
 interface PropsType {
   children: React.ReactNode;
   className?: string;
-  showDim?: boolean;
   animation?: AnimationOptions;
   backActionControl?: {
     func: (value: { modals: MutableRefObject<ModalType[]> }) => void;
@@ -28,20 +27,19 @@ const ModalContainerStyle = styled.div`
 
 export const ModalContext = createContext(initialValue);
 
-const ModalProvider = ({ className = '', showDim, animation, children, backActionControl, scrollRelease, scrollFreeze }: PropsType) => {
+const ModalProvider = ({ className = 'jw-modal', animation, children, backActionControl, scrollRelease, scrollFreeze }: PropsType) => {
   const modalList = useRef<ModalType[]>([]);
   const [modals, setModals] = useState<ModalType[]>([]);
 
   const value = useMemo(() => ({
     ...initialValue,
     className,
-    showDim,
     animation,
     modals: modalList,
     setModals,
     scrollRelease,
     scrollFreeze,
-  }), [className, showDim, animation, scrollRelease, scrollFreeze]);
+  }), [className, animation, scrollRelease, scrollFreeze]);
 
   useEffect(() => {
     backActionControl && backActionControl.func({ modals: modalList });

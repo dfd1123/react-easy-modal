@@ -14,19 +14,26 @@ export interface ModalType {
 
 export interface ModalContextType {
   className?: string;
-  modals: React.MutableRefObject<ModalType[]>;
-  showDim?: boolean;
+  modals: MutableRefObject<ModalType[]>;
   animation?: AnimationOptions;
   setModals: (modals: ModalType[]) => void;
   scrollRelease?: () => void;
   scrollFreeze?: () => void;
 }
 
+export interface ModalTemplatePropsType {
+  className?: string;
+  children: React.ReactNode;
+  showDim?: boolean;
+  close: () => void;
+
+}
+
 export interface ModalPropsType {
   children?: ReactNode;
   className?: string;
-  close?: () => void;
-  resolve?: <T>(value: T) => void;
+  close: () => void;
+  resolve: <T>(value: T) => void;
 }
 
 export interface AnimationOptions {
@@ -35,18 +42,7 @@ export interface AnimationOptions {
   name?: string;
 }
 
-export interface UseModalHookReturn {
-  modals: MutableRefObject<ModalType[]>;
-  modal: OpenModalType;
-  scrollModal: OpenModalType;
-  closeModal: CloseModalType;
-  resolveModal: ResolveModalType;
-  checkModal: CheckModalType;
-  resetModal: () => void;
-  scrollRelease: (() => void) | undefined;
-}
-
-type PropsOf<T> = (T extends FunctionComponent<infer P> ? P : {}) & { animation?: AnimationOptions; duplicateCheck?: boolean; };
+type PropsOf<T> = (T extends FunctionComponent<infer P> ? Omit<P, 'close' | 'resolve'> & { animation?: AnimationOptions; duplicateCheck?: boolean; } : { animation?: AnimationOptions; duplicateCheck?: boolean; });
 
 export type AddModalType = <T extends FunctionComponent<any>>(params : { component: T, props?: PropsOf<T>, isScrollFreeze?: boolean }) => Promise<any>;
 export type OpenModalType = <P = any, T extends FunctionComponent<any> = FunctionComponent>(component: T, props?: PropsOf<T>) => Promise<P>;
